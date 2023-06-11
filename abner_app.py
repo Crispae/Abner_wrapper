@@ -37,10 +37,14 @@ def extract_entities_from_text(text):
 @app.route('/extract_entities', methods=['POST'])
 def extract_entities():
     text = request.json.get('text')
+    
+    try:
+        entities = extract_entities_from_text(text)
+    except IndexError:
+        print("Error occured while processing the text, the tokens may cross the size limitation")
+        return jsonify([{"Result":"Error"}])
 
-    entities = extract_entities_from_text(text)
-
-    return jsonify(entities)
+    return jsonify([{"Result":entities}])
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=9000,debug=True)
