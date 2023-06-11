@@ -42,9 +42,9 @@ def extract_entities():
         entities = extract_entities_from_text(text)
     except IndexError:
         print("Error occured while processing the text, the tokens may cross the size limitation")
-        return jsonify([{"Result":"Error"}])
+        return jsonify({"Result":"Error"})
 
-    return jsonify([{"Result":entities}])
+    return jsonify({"Result":entities})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=9000,debug=True)
