@@ -1,5 +1,5 @@
 # Abner_wrapper
-ABNER is a widely used named entity recognition (NER) tool. AOPbot provides seamless integration with ABNER through a dedicated Python wrapper. For detailed installation instructions, please refer to the ABNER python wrapper repository.
+ABNER is a widely used named entity recognition (NER) tool. AOPbot provides seamless integration with ABNER through a dedicated Python wrapper.
 
 ## Requirements
 1. Install Java JDK 8 or 11
