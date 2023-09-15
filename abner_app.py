@@ -8,7 +8,9 @@ app = Flask(__name__)
 Tagger = autoclass("abner.Tagger")
 t = Tagger()
 
+## To extract entites with position and types
 def extract_entities_from_text(text):
+    
     # Get the entities using abner
     annotated_text = dict(zip(*t.getEntities(text.strip()))) ## This store both the word,type
 
@@ -32,7 +34,6 @@ def extract_entities_from_text(text):
                                 "entity_type":entity_type.lower()}
                 entities_list.append(entites_dict)
         return entities_list
-
     else:
         return None
 
