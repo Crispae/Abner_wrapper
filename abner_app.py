@@ -10,32 +10,27 @@ t = Tagger()
 
 def extract_entities_from_text(text):
     # Get the entities using abner
-    annotated_text = t.getEntities(text.strip())
-    entities = list(set(annotated_text[0]))
+    annotated_text = dict(zip(*t.getEntities(text.strip()))) ## This store both the word,type
 
-    ## condition to check, entites list is not null
-    if entities:
-        # Create a regex pattern to find the entities in the text
-        pattern = r"|".join(entities)
+    if annotated_text:
+        ## creating a pattern
+        escaped_keys = [re.escape(key) for key in annotated_text.keys()]
+        pattern = r"|".join(escaped_keys)
         matches = re.finditer(pattern, text)
-
-        entities_list = []
-        for idx, match in enumerate(matches):
+        
+        entities_list =[]
+        for idx,match in enumerate(matches):
             start_index = match.start()
-            end_index = match.end()
+            end_index = match.end() 
             match_text = match.group()
-            entity_type = annotated_text[1][idx]
+            entity_type = annotated_text.get(match_text)
 
-            entities_dict = {
-                "start": start_index,
-                "end": end_index,
-                "word": match_text,
-                "entity_type": entity_type.lower()
-            }
-
-            ## appending entites to the list
-            entities_list.append(entities_dict)
-
+            if entity_type:
+                entites_dict ={"start":start_index,
+                                "end":end_index,
+                                "word":match_text,
+                                "entity_type":entity_type.lower()}
+                entities_list.append(entites_dict)
         return entities_list
 
     else:
