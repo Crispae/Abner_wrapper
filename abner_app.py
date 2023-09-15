@@ -40,6 +40,7 @@ def extract_entities():
     
     try:
         entities = extract_entities_from_text(text)
+        print(entities)
     except IndexError:
         print("Error occured while processing the text, the tokens may cross the size limitation")
         return jsonify({"Result":"Error"})
